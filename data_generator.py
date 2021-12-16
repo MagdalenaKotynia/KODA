@@ -9,26 +9,29 @@ _mean_val = (_max_val - _min_val)/2 + _min_val
 _img_size = (512, 512)
 
 
-def generate_image_uniform(min_val=_min_val, max_val=_max_val, img_size=_img_size):
+def generate_image_uniform(min_val=_min_val, max_val=_max_val, img_size=_img_size, save=-False):
     data = np.random.uniform(low=min_val, high=max_val+1, size=img_size)
     img = Image.fromarray(data.astype('uint8'), 'L')
-    img.save('test_images/uniform.png')
+    if save is True:
+        img.save('test_images/uniform.png')
 
     return img
 
 
-def generate_image_normal(mi=_mean_val, sigma=0.2*_mean_val, img_size=_img_size):
+def generate_image_normal(mi=_mean_val, sigma=0.2*_mean_val, img_size=_img_size, save=-False):
     data = np.random.normal(loc=mi, scale=sigma, size=img_size)
     img = Image.fromarray(data.astype('uint8'), 'L')
-    img.save('test_images/normal.png')
+    if save is True:
+        img.save('test_images/normal.png')
 
     return img
 
 
-def generate_image_laplace(mi=_mean_val, b=0.2*_mean_val, img_size=_img_size):
+def generate_image_laplace(mi=_mean_val, b=0.2*_mean_val, img_size=_img_size, save=-False):
     data = np.random.laplace(loc=mi, scale=b, size=img_size)
     img = Image.fromarray(data.astype('uint8'), 'L')
-    img.save('test_images/laplace.png')
+    if save is True:
+        img.save('test_images/laplace.png')
 
     return img
 
@@ -47,26 +50,32 @@ def plot():
     plt.subplot(2, 3, 1)
     plt.imshow(laplace, cmap='gray')
     plt.title('Rozkład Laplaca')
+    plt.axis('off')
     plt.subplot(2, 3, 2)
     plt.imshow(normal, cmap='gray')
     plt.title('Rozkład normalny')
+    plt.axis('off')
     plt.subplot(2, 3, 3)
     plt.imshow(uniform, cmap='gray')
     plt.title('Rozkład równomierny')
+    plt.axis('off')
     plt.subplot(2, 3, 4)
     plt.plot(laplace.histogram())
+    plt.ylabel('Liczba pikseli')
+    plt.xlabel('Intensywność')
     plt.subplot(2, 3, 5)
     plt.plot(normal.histogram())
+    plt.ylabel('Liczba pikseli')
+    plt.xlabel('Intensywność')
     plt.subplot(2, 3, 6)
     plt.plot(uniform.histogram())
+    plt.ylabel('Liczba pikseli')
+    plt.xlabel('Intensywność')
     plt.tight_layout()
     plt.show()
 
 
 if __name__ == '__main__':
-    generate_image_normal
-    generate_image_uniform()
-    generate_image_laplace
     plot()
 
 
