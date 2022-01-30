@@ -127,6 +127,10 @@ class Huffman_Tree:
             self.root = queues[1][0]
         except IndexError:
             pass
+        self.get_leaves_binary_description()
+
+    def __repr__(self) -> str:
+        return "Huffman Tree"
     
     def determine_parent_edge_description(node):
         if node.parent.children[0] == node:
@@ -143,17 +147,28 @@ class Huffman_Tree:
                 buffer += str(digit)
                 curr_node = curr_node.parent
             leaf.bin_description = buffer[::-1]
+        return True
+    
+    def get_descriptions_dict(self):
+        """Function creating dictionary: orginal value as key -> bit name mask"""
+        descr_dict = {}
+        for leaf in self.leaves:
+            descr_dict[leaf.orginal_desc] = leaf.bin_description
+        
+        return descr_dict
+
+def get_Huffman_image_description(image):
+    ordered_dic = get_ordered_dict(image)
+    coder = Huffman_Tree(ordered_dic)
+    coder_description = coder.get_descriptions_dict()
+    coded_image = []
+    i, j = 0, 0
+    for row in image:
+        coded_image.append([])
+        for pix in row:
+            c = coder_description[pix]
+            coded_image[i].append(coder_description[pix])
+        i += 1
+    return coded_image, coder_description
 
 
-decription_dict = {
-            'n' : 1,
-            's' : 3,
-            't' : 4,
-            'a' : 10,
-            'i' : 12,
-            'p' : 13,
-            'e' : 15
-        }
-huf_tree = Huffman_Tree(decription_dict)
-huf_tree.get_leaves_binary_description()
-print(huf_tree.root.value, 58)

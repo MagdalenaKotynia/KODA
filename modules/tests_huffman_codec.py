@@ -2,7 +2,7 @@ from copy import copy
 import unittest
 import numpy as np
 
-import huffman_tree as ht
+import huffman_codec as ht
 class TestHuffmanTree(unittest.TestCase):
 
     def test_get_ordered_dict(self):

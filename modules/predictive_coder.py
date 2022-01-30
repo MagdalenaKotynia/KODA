@@ -68,7 +68,7 @@ def data2image(encoded: np.ndarray):
 
 
 if __name__ == '__main__':
-    from data_generator import generate_image_uniform
+    from modules.data_generator import generate_image_uniform
 
     img = generate_image_uniform(img_size=(4, 4))
 
