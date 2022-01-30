@@ -3,7 +3,7 @@ from scipy.stats import entropy
 import matplotlib.pyplot as plt
 import cv2 as cv
 import numpy as np
-from predictive_encoder import predictive_encode
+from predictive_coder import predictive_encode
 
 def get_histogram(data, values_range, show=False, output_file=None):
     hist, bins = np.histogram(data.flatten(), values_range[1] - values_range[0] + 1, values_range)
