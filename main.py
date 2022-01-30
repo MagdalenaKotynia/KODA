@@ -3,7 +3,6 @@ import sys
 import PIL
 import matplotlib.pyplot as plt
 from PIL import Image as im
-
 import modules.predictive_coder as pc
 import modules.data_generator as gen
 import modules.huffman_codec as hc

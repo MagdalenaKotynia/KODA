@@ -1,12 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
-
+import os
+from pathlib import Path
 
 _min_val = 0
 _max_val = 255
 _mean_val = (_max_val - _min_val)/2 + _min_val
 _img_size = (512, 512)
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+path = str(Path(ROOT_DIR).parent.as_posix())
 
 
 def generate_image_uniform(min_val=_min_val, max_val=_max_val, img_size=_img_size, save=-False):
@@ -43,9 +46,9 @@ def save_test_images():
 
 
 def plot():
-    laplace = Image.open('test_images/laplace.png')
-    normal = Image.open('test_images/normal.png')
-    uniform = Image.open('test_images/uniform.png')
+    laplace = Image.open(path + '/test_images/laplace.png')
+    normal = Image.open(path + '/test_images/normal.png')
+    uniform = Image.open(path + '/test_images/uniform.png')
 
     plt.subplot(2, 3, 1)
     plt.imshow(laplace, cmap='gray')
@@ -77,5 +80,8 @@ def plot():
 
 if __name__ == '__main__':
     plot()
+
+
+
 
 
