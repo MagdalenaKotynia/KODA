@@ -13,8 +13,8 @@ from statistics import mean
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 path = str(Path(ROOT_DIR).parent.as_posix())
-VAL_RANGE = (-255, 255)
-
+VAL_RANGE_DIFF = (-255, 255)
+VAL_RANGE = (0, 255)
 
 def get_image(folder):
     images = os.listdir(path + folder)
@@ -28,8 +28,8 @@ def experiments(folder, diff_option):
     avg_bitlens_diff = []
     redundancies_org = []
     redundancies_diff = []
-
-    for image in get_image(folder):
+    images = get_image(folder)
+    for image in images:
         img = im.open(path + folder + image)
         img_org = np.asarray(img)
         img_diff = pc.predictive_encode(img, diff_option)
@@ -39,9 +39,10 @@ def experiments(folder, diff_option):
 
         avg_bitlen_org = get_avg_bit_len(img_huff_org)
         avg_bitlen_diff = get_avg_bit_len(img_huff_diff)
-
-        hist_org = get_histogram(img_org, VAL_RANGE)
-        hist_diff = get_histogram(img_diff, VAL_RANGE)
+        filename_diff = path + "/histograms/" + diff_option + "diff_hist_" + image
+        filename_org = path + "/histograms/" + "org_hist_" + image
+        hist_org = get_histogram(img_org, VAL_RANGE, output_file=filename_org)
+        hist_diff = get_histogram(img_diff, VAL_RANGE_DIFF, output_file=filename_diff)
 
         entropy_org = get_entropy(hist_org)
         entropy_diff = get_entropy(hist_diff)
@@ -67,9 +68,11 @@ def experiments(folder, diff_option):
 
 
 if __name__ == "__main__":
-    diff_options = ["upper", "left"]
-    folders = ["/test_images/", "/generated_test_data/"]
-
+    images = get_image("/test_images/")
+    print(images[0:2])
+    diff_options = ["upper", "left", "median"]
+    #folders = ["/test_images/", "/generated_test_data/"]
+    folders = ["/test_images/"]
     for folder in folders:
         print("/ / / / / / / / / / / / / / / / ")
         print("OBRAZY ", folder)

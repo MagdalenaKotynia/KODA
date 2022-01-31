@@ -38,7 +38,7 @@ def get_entropy(histogram):
 
 def get_image():
     images = {
-        path + "/test_images/dog.png",
+        path + "/my_test_images/dog.png",
         #there you can put all testing files to get histogram and entropy test
     }
     return images
@@ -56,7 +56,6 @@ def histogram_entropy_test():
         entropy = get_entropy(histogram)
         print(histogram)
         print(entropy)
-
 
 
 def get_avg_bit_len(bit_data):
