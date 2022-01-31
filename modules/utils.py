@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 import cv2 as cv
 import numpy as np
 from predictive_coder import predictive_encode
+from PIL import Image as im
+import os
+from pathlib import Path
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+path = str(Path(ROOT_DIR).parent.as_posix())
+
 
 def get_histogram(data, values_range, show=False, output_file=None):
     hist, bins = np.histogram(data.flatten(), values_range[1] - values_range[0] + 1, values_range)
@@ -31,7 +38,7 @@ def get_entropy(histogram):
 
 def get_image():
     images = {
-        r"test_images/dog.png",
+        path + "/test_images/dog.png",
         #there you can put all testing files to get histogram and entropy test
     }
     return images
@@ -40,18 +47,18 @@ def get_image():
 def histogram_entropy_test():
     for i in get_image():
         source_image = i
-        image = cv.imread(source_image, cv.IMREAD_UNCHANGED)
+        #image = cv.imread(source_image, cv.IMREAD_UNCHANGED)
+        image = im.open(source_image)
+        img_org = np.asarray(image)
         differential_image = predictive_encode(image, 'upper')
         histogram = get_histogram(differential_image, (-255, 255), True)
+        #histogram = get_histogram(img_org, (-255, 255), True)
         entropy = get_entropy(histogram)
         print(histogram)
         print(entropy)
 
 
-if __name__ == "__main__":
-    histogram_entropy_test()
-    
-    
+
 def get_avg_bit_len(bit_data):
     total = 0
     total_len = 0
@@ -63,3 +70,10 @@ def get_avg_bit_len(bit_data):
             total += len(word)
     avg_len = float(total) / float(total_len)
     return avg_len
+
+
+if __name__ == "__main__":
+    histogram_entropy_test()
+    
+    
+

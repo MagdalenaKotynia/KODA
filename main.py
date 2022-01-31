@@ -11,7 +11,7 @@ from modules.utils import get_avg_bit_len
 
 def main(argv):
     argumentList = argv
-    img_1 = im.open("test_images/dog.png")
+    img_1 = im.open("my_test_images/dog.png")
     img_org = np.asarray(img_1)
     img_predictive = pc.predictive_encode(img_1, "upper")
     img_huff, decoder = hc.get_Huffman_image_description(img_predictive)

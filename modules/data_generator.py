@@ -46,7 +46,7 @@ def save_test_images():
 
 
 def plot():
-    laplace = Image.open(path + '/test_images/laplace.png')
+    laplace = Image.open(path + '/test_images/dog.png')
     normal = Image.open(path + '/test_images/normal.png')
     uniform = Image.open(path + '/test_images/uniform.png')
 
