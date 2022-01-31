@@ -2,6 +2,7 @@ from argparse import ArgumentTypeError
 from turtle import width
 import numpy as np
 from PIL import Image as im
+import matplotlib.pyplot as plt
 import json
 
 import modules.predictive_coder as pc
@@ -19,15 +20,19 @@ def encode_image(image_name, pred_flag):
         img_predictive = pc.predictive_encode(img, "left")
     else:
         raise ArgumentTypeError
+    print(img_predictive[0][0])
+    plt.imshow(img_predictive)
+    plt.show()
     print("Image predictive encoded")
     img_huff, huf_decoder = hc.get_Huffman_image_description(img_predictive)
+    print(huf_decoder[89.0])
     encoder = {
                "predictive encoding mehod": pred_flag,
                "huffman dict": huf_decoder,
                "height": img_org.shape[0],
                "width" : img_org.shape[1]
                }
-    print("Image encoded with Huffman algoritm")
+    print("Image encoded with Huffman algorithm")
     print(get_avg_bit_len(img_huff))
     return img_huff, encoder
 
@@ -59,13 +64,19 @@ def read_image(image_name="default"):
 
 def decode_image(decoder, data):
     width, height = int(decoder["width"]), int(decoder["height"])
-    huff_dict, pred_flag = decoder["huffman dict"], decoder["predictive encoding mehod"]
-    inv_huff_dict = {v: k for k, v in huff_dict.items()}
-    pred_image = np.zeros((height, width))
-    for i in range(0, height):
-        for j in range(0, width):
+    huff_decoder, pred_flag = decoder["huffman dict"], decoder["predictive encoding mehod"]
+    inv_huff_dict = {v: k for k, v in huff_decoder.items()}
+    print(inv_huff_dict["111000101000000"])
+    print(huff_decoder["89.0"])
+    pred_image = np.zeros((width, height))
+    print(float(inv_huff_dict[data[0]]))
+    for i in range(0, width):
+        for j in range(0, height):
             pred_image[i][j] = float(inv_huff_dict[data[i * j + j]])
     print("image decoded with huffman algorithm")
+    plt.imshow(pred_image)
+    plt.show()
+    print(pred_image.shape)
     if pred_flag == 'u':
         img = pc.predictive_decode(pred_image, "upper")
     elif pred_flag == 'm':

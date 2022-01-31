@@ -68,15 +68,9 @@ def experiments(folder, diff_option):
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    diff_options = ["upper", "left"]
-    folders = ["/test_images/", "/generated_test_data/"]
-
-=======
     diff_options = ["upper", "left", "median"]
     #folders = ["/test_images/", "/generated_test_data/"]
     folders = ["/generated_test_data/"]
->>>>>>> c142c83586d68b397c63e4bc130960132b8359b5
     for folder in folders:
         print("/ / / / / / / / / / / / / / / / ")
         print("OBRAZY ", folder)
