@@ -94,7 +94,7 @@ if __name__ == '__main__':
     print('Obraz różnicowy left \n', img_diff_left)
     print('Obraz zdekodowany left \n', img_decoded_left)
 
-    dog = Image.open('test_images/dog.png')
+    dog = Image.open('my_test_images/dog.png')
     dog.show()
     dog_diff = predictive_encode(dog, 'upper')
     dog_decoded = predictive_decode(dog_diff, 'upper')
