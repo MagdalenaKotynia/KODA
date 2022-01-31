@@ -68,7 +68,7 @@ def experiments(folder, diff_option):
 
 if __name__ == "__main__":
     diff_options = ["upper", "left"]
-    folders = ["/generated_test_data/"]
+    folders = ["/test_images/", "/generated_test_data/"]
 
     for folder in folders:
         print("/ / / / / / / / / / / / / / / / ")

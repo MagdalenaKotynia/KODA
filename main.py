@@ -1,3 +1,6 @@
+from argparse import ArgumentTypeError
+import imp
+from msilib.schema import Error
 import numpy as np
 import sys
 import PIL
@@ -6,28 +9,18 @@ from PIL import Image as im
 import modules.predictive_coder as pc
 import modules.data_generator as gen
 import modules.huffman_codec as hc
+import modules.operations as op
 from modules.utils import get_avg_bit_len
-
-def process_image(image):
-    
 
 
 def main(argv):
     argumentList = argv
-    img_1 = im.open("my_test_images/dog.png")
-    img_org = np.asarray(img_1)
-    img_predictive = pc.predictive_encode(img_1, "upper")
-    img_huff, decoder = hc.get_Huffman_image_description(img_predictive)
-
-    img_huff_org, decoder_org = hc.get_Huffman_image_description(img_org)
-
-    print("ok")
-    print(type(img_huff))
-    #print(img_huff)
-    print(get_avg_bit_len(img_huff))
-    print(get_avg_bit_len(img_huff_org))
-    print(type(img_1))
-
+    img_huff, encoder = op.encode_image("my_test_images/dog.png", 'u')
+    op.write_coded_image(img_huff, encoder, "dog")
+    decoder, data = op.read_image(image_name="dog")
+    decoded_img = op.decode_image(decoder, data)
+    plt.imshow(decoded_img)
+    plt.show()
 
 if __name__ == "__main__":
     main(sys.argv[1:])

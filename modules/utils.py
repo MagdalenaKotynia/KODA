@@ -3,7 +3,7 @@ from scipy.stats import entropy
 import matplotlib.pyplot as plt
 import cv2 as cv
 import numpy as np
-from predictive_coder import predictive_encode
+from modules.predictive_coder import predictive_encode
 from PIL import Image as im
 import os
 from pathlib import Path
