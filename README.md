@@ -48,3 +48,4 @@ predictive_encoder.py zawiera funkcje umożliwiające kodowanie i dekodowanie pr
 <p><strong>Bibliografia:</strong></p>
 <p>Artur Przelaskowski, Kompresja danych. Podstawy. Metody bezstratne. Kodery obraz&oacute;w., Wydawnictwo BTC, 2005</p>
 <p>K. Sayood, Kompresja danych - wprowadzenie, Wydawnictwo RM, 2002</p>
+
