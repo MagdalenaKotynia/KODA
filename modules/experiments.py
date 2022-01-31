@@ -4,7 +4,7 @@ import PIL
 import matplotlib.pyplot as plt
 from PIL import Image as im
 import predictive_coder as pc
-import modules.data_generator as gen
+import data_generator as gen
 import huffman_codec as hc
 from utils import get_avg_bit_len, get_histogram, get_entropy
 import os
@@ -68,7 +68,7 @@ def experiments(folder, diff_option):
 
 if __name__ == "__main__":
     diff_options = ["upper", "left"]
-    folders = ["/test_images/", "/generated_test_data/"]
+    folders = ["/generated_test_data/"]
 
     for folder in folders:
         print("/ / / / / / / / / / / / / / / / ")

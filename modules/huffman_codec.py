@@ -1,6 +1,7 @@
 from audioop import reverse
 from copy import deepcopy
 from hashlib import new
+from logging import root
 import numpy as np
 import queue as q
 
@@ -119,14 +120,25 @@ class Huffman_Tree:
             new_node.children = [node_1, node_2]
             self.nodes.append(new_node)
             queues[1].append(new_node)
-        try: 
-            self.root = queues[0][0]
-        except IndexError:
-            pass
-        try:
-            self.root = queues[1][0]
-        except IndexError:
-            pass
+        if len(queues[0]) == 1 and len(queues[1]) == 1:
+            node_1 = queues[q_1_num].pop(q_1_ele)
+            node_2 = queues[q_2_num].pop(q_2_ele)
+            new_node = Node(node_1.value + node_2.value)
+            node_1.parent = new_node
+            node_2.parent = new_node
+            self.leaves.append(node_1)
+            new_node.children = [node_1, node_2]
+            self.nodes.append(new_node)
+            self.root = new_node
+        else:
+            try: 
+                self.root = queues[0][0]
+            except IndexError:
+                pass
+            try:
+                self.root = queues[1][0]
+            except IndexError:
+                pass
         self.get_leaves_binary_description()
 
     def __repr__(self) -> str:
