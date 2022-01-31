@@ -8,6 +8,9 @@ import modules.data_generator as gen
 import modules.huffman_codec as hc
 from modules.utils import get_avg_bit_len
 
+def process_image(image):
+    
+
 
 def main(argv):
     argumentList = argv
