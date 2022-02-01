@@ -1,5 +1,6 @@
 from argparse import ArgumentTypeError
 from turtle import width
+from xml.dom.minidom import Element
 import numpy as np
 from PIL import Image as im
 import matplotlib.pyplot as plt
@@ -20,12 +21,8 @@ def encode_image(image_name, pred_flag):
         img_predictive = pc.predictive_encode(img, "left")
     else:
         raise ArgumentTypeError
-    print(img_predictive[0][0])
-    plt.imshow(img_predictive)
-    plt.show()
     print("Image predictive encoded")
     img_huff, huf_decoder = hc.get_Huffman_image_description(img_predictive)
-    print(huf_decoder[89.0])
     encoder = {
                "predictive encoding mehod": pred_flag,
                "huffman dict": huf_decoder,
@@ -66,16 +63,8 @@ def decode_image(decoder, data):
     width, height = int(decoder["width"]), int(decoder["height"])
     huff_decoder, pred_flag = decoder["huffman dict"], decoder["predictive encoding mehod"]
     inv_huff_dict = {v: k for k, v in huff_decoder.items()}
-    print(inv_huff_dict["111000101000000"])
-    print(huff_decoder["89.0"])
-    pred_image = np.zeros((width, height))
-    print(float(inv_huff_dict[data[0]]))
-    for i in range(0, width):
-        for j in range(0, height):
-            pred_image[i][j] = float(inv_huff_dict[data[i * j + j]])
-    print("image decoded with huffman algorithm")
-    plt.imshow(pred_image)
-    plt.show()
+    pred_image = np.array([float(inv_huff_dict[item]) for item in data])
+    pred_image = np.reshape(pred_image, (height, width))
     print(pred_image.shape)
     if pred_flag == 'u':
         img = pc.predictive_decode(pred_image, "upper")

@@ -84,6 +84,12 @@ class Node:
             return True
         else:
             return False
+
+    def determine_parent_edge_value(self):
+        if self.parent.children[0] == self:
+            return 0
+        elif self.parent.children[1] == self:
+            return 1
     
 class Leaf(Node):
     def __init__(self, frequency, input_orginal_desc):
@@ -101,7 +107,11 @@ class Huffman_Tree:
         self.nodes = []
         self.leaves = []
 
-        q_0 = [Leaf(freq, value) for value, freq in ordered_frequency_dict.items()]
+        q_0 = []
+        freq_unique = 1
+        for desc_value, _ in ordered_frequency_dict.items():
+            q_0.append(Leaf( freq_unique, desc_value))
+            freq_unique += 1
         q_1 = []
         queues = [q_0, q_1]
         while len(queues[0]) > 1 or len(queues[1]) > 1:
@@ -145,9 +155,10 @@ class Huffman_Tree:
         return "Huffman Tree"
     
     def determine_parent_edge_description(node):
+        # print(node.value, node.parent.children[0].value, node.parent.children[1].value)
         if node.parent.children[0] == node:
             return 0
-        else:
+        elif node.parent.children[1] == node:
             return 1
 
     def get_leaves_binary_description(self):

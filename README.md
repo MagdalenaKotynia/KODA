@@ -14,6 +14,7 @@
     <li>Ocenić efektywność algorytmu do kodowania obraz&oacute;w naturalnych.</li>
 </ul>
 <p><strong>Struktura projektu:</strong></p>
+<p>main.py - program startowy, za jego pomocą będzie możliwe uruchomienie testu algortmu kodowania predykcyjnego oraz Huffmana dla jednego z testowych zdjęć.</p>
 <p><em>Kody algotym&oacute;w:</em></p>
 <p>/modules - folder zawiera gł&oacute;wną część projektu, kt&oacute;ra zawiera algorytmy jak i funkcje testujące:</p>
 <ul>
@@ -28,7 +29,6 @@
 <p>/test_images - lista naturalnych obraz&oacute;w testowych</p>
 <p>/my_test_images - lista własnych obraz&oacute;w testowych</p>
 <p>/generated_test_data - lista sztucznie wygenerowanych obraz&oacute;w testowych wykorzystanych do por&oacute;wnania z otrzymanymi danymi</p>
-<p>/histograms - lista z wygenerowanymi histogramami każdego testowanego obrazu</p>
 <p>Pozostałe foldery /__pycache__ oraz .idea są konieczne do działania powyższych program&oacute;w</p>
 <p><strong>Wyb&oacute;r narzędzi programistycznych:</strong></p>
 <p><strong>Python, używane biblioteki:</strong></p>
